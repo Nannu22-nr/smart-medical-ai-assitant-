@@ -20,7 +20,7 @@
       <nav class="nav">
         <div class="nav-title">Navigation</div>
         <button class="nav-item active" onclick="showSection('home')" aria-label="Home Section">🏠 Home</button>
-        <button class="nav-item" onclick="showSection('chat')" aria-label="Doctor Chat Section">💬 Doctor Chat</button>
+        <button class="nav-item" onclick="showSection('chat')" aria-label="Medical AI Chat Section">💬 Chat with Medical AI assistant</button>
         <button class="nav-item" onclick="showSection('nutrition')" aria-label="Nutrition Planner Section">🍎 Nutrition</button>
         <button class="nav-item" onclick="showSection('contact')" aria-label="Contact Section">📞 Contact</button>
       </nav>
@@ -56,7 +56,7 @@
                 <div class="phone-frame">
                   <div class="phone-screen">
                     <div class="demo-chat">
-                      <div class="demo-bubble doctor">
+                      <div class="demo-bubble Medical AI assistant">
                         <div class="demo-avatar">👩‍⚕️</div>
                         <div class="demo-message">Hello! How can I assist you today?</div>
                       </div>
@@ -64,7 +64,7 @@
                         <div class="demo-message">I have a persistent headache.</div>
                         <div class="demo-avatar">🧑</div>
                       </div>
-                      <div class="demo-bubble doctor">
+                      <div class="demo-bubble Medical AI assistant">
                         <div class="demo-avatar">👩‍⚕️</div>
                         <div class="demo-message">Let's discuss your symptoms in detail.</div>
                       </div>
@@ -199,7 +199,7 @@
       contactSection.style.display = section === 'contact' ? 'block' : 'none';
 
       pageTitle.textContent = section === 'home' ? 'Home 🏠' :
-                              section === 'chat' ? 'Doctor Chat 👩‍⚕️' :
+                              section === 'chat' ? 'Chat with Medical AI assistant 👩‍⚕️' :
                               section === 'nutrition' ? 'Nutrition Planner 🍎' :
                               'Contact 📞';
 
