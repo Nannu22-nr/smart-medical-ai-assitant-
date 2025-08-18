@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nannu AI Medical Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation">
+      <div class="brand" aria-label="Nannu AI Medical Assistant Brand">
+        <span class="logo-left">Nannu</span>
+        <span class="logo-heart">♥</span>
+        <span class="logo-right">AI Medical Assistant</span>
+      </div>
+      <nav class="nav">
+        <div class="nav-title">Navigation</div>
+        <button class="nav-item active" onclick="showSection('home')" aria-label="Home Section">🏠 Home</button>
+        <button class="nav-item" onclick="showSection('chat')" aria-label="Doctor Chat Section">💬 Doctor Chat</button>
+        <button class="nav-item" onclick="showSection('nutrition')" aria-label="Nutrition Planner Section">🍎 Nutrition</button>
+        <button class="nav-item" onclick="showSection('contact')" aria-label="Contact Section">📞 Contact</button>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main" role="main">
+      <header class="page-header">
+        <h1 id="pageTitle">Home 🏠</h1>
+      </header>
+
+      <!-- Home Section -->
+      <section id="home-section" class="home" aria-live="polite">
+        <div class="hero-section">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h2 class="hero-title">AI-POWERED<br><span class="hero-subtitle">HEALTHCARE ASSISTANT</span></h2>
+              <p class="hero-description">Your 24/7 personal medical companion for consultations, symptom analysis, and personalized nutrition plans.</p>
+              <button class="cta-button" onclick="showSection('chat')">Begin Your Journey</button>
+            </div>
+            <div class="hero-visual">
+              <div class="doctor-image-container">
+                <img src="{{ url_for('static', filename='female.avif') }}" alt="AI medical assistant" class="E:\A\chatbot\medial AI chatbot\female.avif">
+                <div class="floating-icons">
+                  <div class="icon-item" style="--delay: 0s">💊</div>
+                  <div class="icon-item" style="--delay: 0.5s">🩺</div>
+                  <div class="icon-item" style="--delay: 1s">📋</div>
+                  <div class="icon-item" style="--delay: 1.5s">❤️</div>
+                  <div class="icon-item" style="--delay: 2s">🏥</div>
+                </div>
+              </div>
+              <div class="chat-demo">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <div class="demo-chat">
+                      <div class="demo-bubble doctor">
+                        <div class="demo-avatar">👩‍⚕️</div>
+                        <div class="demo-message">Hello! How can I assist you today?</div>
+                      </div>
+                      <div class="demo-bubble patient">
+                        <div class="demo-message">I have a persistent headache.</div>
+                        <div class="demo-avatar">🧑</div>
+                      </div>
+                      <div class="demo-bubble doctor">
+                        <div class="demo-avatar">👩‍⚕️</div>
+                        <div class="demo-message">Let's discuss your symptoms in detail.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="features-section">
+          <h3>Why Nannu AI?</h3>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🤖</div>
+              <h4>Smart Diagnosis</h4>
+              <p>AI-driven symptom analysis for quick insights.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">⏰</div>
+              <h4>Always Available</h4>
+              <p>Round-the-clock support, anytime you need.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🍎</div>
+              <h4>Custom Nutrition</h4>
+              <p>Tailored plans to meet your wellness goals.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🔒</div>
+              <h4>Secure & Private</h4>
+              <p>Top-tier encryption for your health data.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="health-tips">
+          <h3>Daily Health Insights</h3>
+          <div class="tips-container">
+            <div class="tip-item">
+              <span class="tip-icon">💊</span>
+              <span class="tip-text">Monitor symptoms and seek professional help for severe issues.</span>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">🥗</span>
+              <span class="tip-text">Balance your meals and drink plenty of water daily.</span>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">🏃‍♂️</span>
+              <span class="tip-text">Stay active for better heart health and strength.</span>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">🧘‍♀️</span>
+              <span class="tip-text">Prioritize mental well-being with rest and mindfulness.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chat Section -->
+      <section id="chat-section" class="chat" style="display:none;" aria-live="polite"></section>
+
+      <!-- Nutrition Section -->
+      <section id="nutrition-section" class="nutrition" style="display:none;" aria-live="polite">
+        <h3>Personalized Nutrition Planner</h3>
+        <div class="nutrition-form">
+          <label for="age">Age: <input type="number" id="age" min="1" max="120" required aria-required="true" /></label>
+          <label for="weight">Weight (kg): <input type="number" id="weight" step="0.1" min="1" required aria-required="true" /></label>
+          <label for="height">Height (cm): <input type="number" id="height" min="1" required aria-required="true" /></label>
+          <label for="goal">Goal:
+            <select id="goal" required aria-required="true">
+              <option value="lose weight">Lose Weight</option>
+              <option value="gain weight">Gain Weight</option>
+              <option value="maintain weight">Maintain Weight</option>
+            </select>
+          </label>
+          <label for="duration">Plan Duration:
+            <select id="duration" required aria-required="true">
+              <option value="1 week">1 Week</option>
+              <option value="2 weeks">2 Weeks</option>
+              <option value="1 month">1 Month</option>
+            </select>
+          </label>
+          <button onclick="generatePlan()" aria-label="Generate Nutrition Plan">Generate Plan</button>
+        </div>
+        <div id="nutrition-result" aria-live="assertive"></div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact-section" class="contact" style="display:none;" aria-live="polite">
+        <h3>Contact the Developer</h3>
+        <div class="developer-info">
+          <img src="{{ url_for('static', filename='Ohidul Alam.jpg') }}" alt="Developer Ohidul Alam" class="developer-image">
+          <div class="bio-text">
+            <p>I am a passionate and ambitious professional with a strong foundation in artificial intelligence, machine learning, and data-driven problem solving. My work combines technical depth with social impact, applying AI to critical domains such as healthcare, finance, sustainability, and consumer behavior. From developing brain tumor detection models and medical AI assistants to designing ESG-driven business strategies and fraud detection systems, my projects reflect both expertise and a commitment to solving real-world challenges.</p>
+            <p>I thrive at the intersection of research and application, transforming data science and deep learning concepts into practical tools. I have deployed AI solutions through platforms like Flask, FastAPI, and Render, ensuring accessibility, usability, and impact. My ability to integrate advanced modeling with user-friendly interfaces demonstrates my vision of creating holistic, meaningful solutions rather than isolated experiments.</p>
+            <p>Beyond technical proficiency, I bring perseverance, adaptability, and creativity to every project. I embrace challenges such as debugging, optimizing models, and streamlining deployment, while maintaining strong communication through academic writing and professional networking. In essence, I embody the qualities of a modern innovator: a continuous learner, a builder of solutions, and a change-maker dedicated to making technology transformative.</p>
+          </div>
+          <div class="contact-links">
+            <h4>Get in Touch:</h4>
+            <ul>
+              <li><a href="https://www.facebook.com/share/1FQdkh5dAi/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li>WhatsApp: 01771490287</li>
+              <li>Telegram: 01771490287</li>
+              <li><a href="https://www.linkedin.com/in/ohidul-alam-54123a287" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chat Composer -->
+      <div class="composer" role="form" aria-label="Chat input form">
+        <input id="msgInput" type="text" placeholder="Describe your symptoms..." aria-label="Enter your message" autocomplete="off" />
+        <button onclick="submitMessage()" title="Send" aria-label="Send message">➤</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const chatSection = document.getElementById("chat-section");
+    const nutritionSection = document.getElementById("nutrition-section");
+    const homeSection = document.getElementById("home-section");
+    const contactSection = document.getElementById("contact-section");
+    const input = document.getElementById("msgInput");
+    const pageTitle = document.getElementById("pageTitle");
+
+    function showSection(section) {
+      homeSection.style.display = section === 'home' ? 'block' : 'none';
+      chatSection.style.display = section === 'chat' ? 'flex' : 'none';
+      nutritionSection.style.display = section === 'nutrition' ? 'block' : 'none';
+      contactSection.style.display = section === 'contact' ? 'block' : 'none';
+
+      pageTitle.textContent = section === 'home' ? 'Home 🏠' :
+                              section === 'chat' ? 'Doctor Chat 👩‍⚕️' :
+                              section === 'nutrition' ? 'Nutrition Planner 🍎' :
+                              'Contact 📞';
+
+      document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+      document.querySelector(`.nav-item[onclick="showSection('${section}')"]`).classList.add("active");
+
+      if (section === 'chat') chatSection.scrollTop = chatSection.scrollHeight;
+    }
+
+    function addBubble(text, who = "user") {
+      const wrap = document.createElement("div");
+      wrap.className = `bubble ${who}`;
+      const icon = document.createElement("div");
+      icon.className = "icon";
+      icon.textContent = who === "user" ? "🧑" : "🩺";
+      const msg = document.createElement("div");
+      msg.className = "text";
+      msg.textContent = text;
+      wrap.appendChild(icon);
+      wrap.appendChild(msg);
+      chatSection.appendChild(wrap);
+      chatSection.scrollTop = chatSection.scrollHeight;
+    }
+
+    async function submitMessage() {
+      const message = input.value.trim();
+      if (!message) {
+        input.setCustomValidity("Please enter a message.");
+        input.reportValidity();
+        return;
+      }
+      input.setCustomValidity("");
+      addBubble(message, "user");
+      input.value = "";
+      const thinking = document.createElement("div");
+      thinking.className = "bubble bot typing";
+      thinking.innerHTML = `<div class="icon">🩺</div><div class="text">Thinking…</div>`;
+      chatSection.appendChild(thinking);
+      chatSection.scrollTop = chatSection.scrollHeight;
+
+      try {
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+        thinking.remove();
+        addBubble(data.reply || "Sorry, something went wrong.", "bot");
+      } catch (e) {
+        thinking.remove();
+        addBubble("Network error. Please try again.", "bot");
+      }
+    }
+
+    function generatePlan() {
+      const data = {
+        age: document.getElementById("age").value,
+        weight: document.getElementById("weight").value,
+        height: document.getElementById("height").value,
+        goal: document.getElementById("goal").value,
+        duration: document.getElementById("duration").value
+      };
+
+      if (!data.age || !data.weight || !data.height) {
+        document.getElementById("nutrition-result").innerHTML = `<p class="error">Please fill in all required fields.</p>`;
+        return;
+      }
+
+      fetch("/nutrition", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("nutrition-result").innerHTML = `<div class="plan-output">${data.reply || "Error generating plan. Please try again."}</div>`;
+      })
+      .catch(() => {
+        document.getElementById("nutrition-result").innerHTML = `<p class="error">Network error. Please try again.</p>`;
+      });
+    }
+
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        submitMessage();
+      }
+    });
+
+    window.addEventListener("load", () => {
+      if (chatSection.style.display === 'flex') {
+        addBubble("Hello! How are you feeling today?", "bot");
+      }
+    });
+  </script>
+</body>
+</html>
