@@ -3,296 +3,758 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nannu AI Medical Assistant</title>
+  <title>Nannu AI - Advanced Medical Assistant</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <link rel="icon" href="data:,">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <div class="app">
-    <!-- Sidebar -->
-    <aside class="sidebar" role="navigation">
-      <div class="brand" aria-label="Nannu AI Medical Assistant Brand">
-        <span class="logo-left">Nannu</span>
-        <span class="logo-heart">♥</span>
-        <span class="logo-right">AI Medical Assistant</span>
+    <!-- Enhanced Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <i class="fas fa-user-md"></i>
+          <span>Nannu AI</span>
+        </div>
+        <div class="nav-items">
+          <button class="nav-item active" onclick="showSection('home')" aria-label="Home">
+            <i class="fas fa-home"></i> Home
+          </button>
+          <button class="nav-item" onclick="showSection('chat')" aria-label="AI Chat">
+            <i class="fas fa-comments"></i> Chat
+          </button>
+          <button class="nav-item" onclick="showSection('symptoms')" aria-label="Symptom Analyzer">
+            <i class="fas fa-stethoscope"></i> Symptoms
+          </button>
+          <button class="nav-item" onclick="showSection('nutrition')" aria-label="Nutrition Planner">
+            <i class="fas fa-apple-alt"></i> Nutrition
+          </button>
+          <button class="nav-item" onclick="showSection('drugs')" aria-label="Drug Interactions">
+            <i class="fas fa-pills"></i> Drugs
+          </button>
+          <button class="nav-item" onclick="showSection('contact')" aria-label="Contact">
+            <i class="fas fa-address-book"></i> Contact
+          </button>
+        </div>
+        <div class="nav-controls">
+          <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
       </div>
-      <nav class="nav">
-        <div class="nav-title">Navigation</div>
-        <button class="nav-item active" onclick="showSection('home')" aria-label="Home Section">🏠 Home</button>
-        <button class="nav-item" onclick="showSection('chat')" aria-label="Medical AI Chat Section">💬 Chat with Medical AI assistant</button>
-        <button class="nav-item" onclick="showSection('nutrition')" aria-label="Nutrition Planner Section">🍎 Nutrition</button>
-        <button class="nav-item" onclick="showSection('contact')" aria-label="Contact Section">📞 Contact</button>
-      </nav>
-    </aside>
+    </nav>
 
-    <!-- Main -->
+    <!-- Main Content -->
     <main class="main" role="main">
       <header class="page-header">
-        <h1 id="pageTitle">Home 🏠</h1>
+        <h1 id="pageTitle">Nannu AI - Advanced Medical Assistant</h1>
+        <div id="sessionInfo" class="session-info" style="display:none;">
+          <span id="sessionStats"></span>
+        </div>
       </header>
 
-      <!-- Home Section -->
-      <section id="home-section" class="home" aria-live="polite">
-        <div class="hero-section">
-          <div class="hero-content">
-            <div class="hero-text">
-              <h2 class="hero-title">AI-POWERED<br><span class="hero-subtitle">HEALTHCARE ASSISTANT</span></h2>
-              <p class="hero-description">Your 24/7 personal medical companion for consultations, symptom analysis, and personalized nutrition plans.</p>
-              <button class="cta-button" onclick="showSection('chat')">Begin Your Journey</button>
-            </div>
-            <div class="hero-visual">
-              <div class="doctor-image-container">
-                <img src="{{ url_for('static', filename='female.avif') }}" alt="AI medical assistant" class="E:\A\chatbot\medial AI chatbot\female.avif">
-                <div class="floating-icons">
-                  <div class="icon-item" style="--delay: 0s">💊</div>
-                  <div class="icon-item" style="--delay: 0.5s">🩺</div>
-                  <div class="icon-item" style="--delay: 1s">📋</div>
-                  <div class="icon-item" style="--delay: 1.5s">❤️</div>
-                  <div class="icon-item" style="--delay: 2s">🏥</div>
-                </div>
-              </div>
-              <div class="chat-demo">
-                <div class="phone-frame">
-                  <div class="phone-screen">
-                    <div class="demo-chat">
-                      <div class="demo-bubble Medical AI assistant">
-                        <div class="demo-avatar">👩‍⚕️</div>
-                        <div class="demo-message">Hello! How can I assist you today?</div>
-                      </div>
-                      <div class="demo-bubble patient">
-                        <div class="demo-message">I have a persistent headache.</div>
-                        <div class="demo-avatar">🧑</div>
-                      </div>
-                      <div class="demo-bubble Medical AI assistant">
-                        <div class="demo-avatar">👩‍⚕️</div>
-                        <div class="demo-message">Let's discuss your symptoms in detail.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <!-- Enhanced Home Section -->
+      <section id="home-section" class="hero-section" aria-live="polite">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h2 class="hero-title">Next-Gen <span class="hero-subtitle">AI Healthcare</span></h2>
+            <p class="hero-description">Advanced medical AI with symptom analysis, drug interaction checking, personalized nutrition, and intelligent health consultations.</p>
+            <div class="cta-buttons">
+              <button class="cta-button primary" onclick="showSection('chat')">
+                <i class="fas fa-comments"></i> Start Consultation
+              </button>
+              <button class="cta-button secondary" onclick="showSection('symptoms')">
+                <i class="fas fa-stethoscope"></i> Analyze Symptoms
+              </button>
             </div>
           </div>
         </div>
-
+        
         <div class="features-section">
-          <h3>Why Nannu AI?</h3>
+          <h3>Advanced AI Features</h3>
           <div class="features-grid">
             <div class="feature-card">
-              <div class="feature-icon">🤖</div>
-              <h4>Smart Diagnosis</h4>
-              <p>AI-driven symptom analysis for quick insights.</p>
+              <div class="feature-icon"><i class="fas fa-brain"></i></div>
+              <h4>AI Diagnostics</h4>
+              <p>Advanced symptom analysis with severity assessment and recommendations.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">⏰</div>
-              <h4>Always Available</h4>
-              <p>Round-the-clock support, anytime you need.</p>
+              <div class="feature-icon"><i class="fas fa-pills"></i></div>
+              <h4>Drug Interactions</h4>
+              <p>Comprehensive medication interaction checking and safety alerts.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">🍎</div>
-              <h4>Custom Nutrition</h4>
-              <p>Tailored plans to meet your wellness goals.</p>
+              <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+              <h4>Health Tracking</h4>
+              <p>Monitor your health journey with conversation history and insights.</p>
             </div>
             <div class="feature-card">
-              <div class="feature-icon">🔒</div>
-              <h4>Secure & Private</h4>
-              <p>Top-tier encryption for your health data.</p>
+              <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+              <h4>Smart Nutrition</h4>
+              <p>AI-powered meal plans with recipes and shopping lists.</p>
             </div>
-          </div>
-        </div>
-
-        <div class="health-tips">
-          <h3>Daily Health Insights</h3>
-          <div class="tips-container">
-            <div class="tip-item">
-              <span class="tip-icon">💊</span>
-              <span class="tip-text">Monitor symptoms and seek professional help for severe issues.</span>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="fas fa-clock"></i></div>
+              <h4>24/7 Availability</h4>
+              <p>Round-the-clock medical assistance whenever you need it.</p>
             </div>
-            <div class="tip-item">
-              <span class="tip-icon">🥗</span>
-              <span class="tip-text">Balance your meals and drink plenty of water daily.</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">🏃‍♂️</span>
-              <span class="tip-text">Stay active for better heart health and strength.</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">🧘‍♀️</span>
-              <span class="tip-text">Prioritize mental well-being with rest and mindfulness.</span>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+              <h4>Privacy First</h4>
+              <p>Your health data is secure with enterprise-grade encryption.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Chat Section -->
-      <section id="chat-section" class="chat" style="display:none;" aria-live="polite"></section>
-
-      <!-- Nutrition Section -->
-      <section id="nutrition-section" class="nutrition" style="display:none;" aria-live="polite">
-        <h3>Personalized Nutrition Planner</h3>
-        <div class="nutrition-form">
-          <label for="age">Age: <input type="number" id="age" min="1" max="120" required aria-required="true" /></label>
-          <label for="weight">Weight (kg): <input type="number" id="weight" step="0.1" min="1" required aria-required="true" /></label>
-          <label for="height">Height (cm): <input type="number" id="height" min="1" required aria-required="true" /></label>
-          <label for="goal">Goal:
-            <select id="goal" required aria-required="true">
-              <option value="lose weight">Lose Weight</option>
-              <option value="gain weight">Gain Weight</option>
-              <option value="maintain weight">Maintain Weight</option>
+      <!-- Enhanced Chat Section -->
+      <section id="chat-section" class="chat-container" style="display:none;" aria-live="polite">
+        <div class="chat-header">
+          <div class="chat-controls">
+            <select id="chatMode" class="chat-mode-selector">
+              <option value="normal">Normal Chat</option>
+              <option value="detailed">Detailed Analysis</option>
+              <option value="quick">Quick Response</option>
             </select>
-          </label>
-          <label for="duration">Plan Duration:
-            <select id="duration" required aria-required="true">
-              <option value="1 week">1 Week</option>
-              <option value="2 weeks">2 Weeks</option>
-              <option value="1 month">1 Month</option>
-            </select>
-          </label>
-          <button onclick="generatePlan()" aria-label="Generate Nutrition Plan">Generate Plan</button>
+            <button onclick="exportChat()" class="control-btn" title="Export Chat">
+              <i class="fas fa-download"></i>
+            </button>
+            <button onclick="showChatStats()" class="control-btn" title="Chat Statistics">
+              <i class="fas fa-chart-bar"></i>
+            </button>
+            <button onclick="clearChat()" class="control-btn danger" title="Clear Chat">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
         </div>
-        <div id="nutrition-result" aria-live="assertive"></div>
+        
+        <div id="chatWindow" class="chat-window">
+          <!-- Messages will appear here -->
+        </div>
+        
+        <div class="chat-composer">
+          <div class="input-container">
+            <input id="msgInput" type="text" placeholder="Describe your symptoms or ask a medical question..." 
+                   aria-label="Chat message input" autocomplete="off" maxlength="2000">
+            <div class="input-actions">
+              <button onclick="submitMessage()" class="send-btn" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+          <div class="chat-suggestions" id="chatSuggestions">
+            <button onclick="insertSuggestion('I have a headache and fever')" class="suggestion-btn">
+              Headache & Fever
+            </button>
+            <button onclick="insertSuggestion('What should I eat for weight loss?')" class="suggestion-btn">
+              Weight Loss Diet
+            </button>
+            <button onclick="insertSuggestion('Can I take ibuprofen with my medication?')" class="suggestion-btn">
+              Drug Interactions
+            </button>
+          </div>
+        </div>
       </section>
 
-      <!-- Contact Section -->
-      <section id="contact-section" class="contact" style="display:none;" aria-live="polite">
-        <h3>Contact the Developer</h3>
+      <!-- New Symptom Analyzer Section -->
+      <section id="symptoms-section" class="analyzer-section" style="display:none;" aria-live="polite">
+        <h3><i class="fas fa-stethoscope"></i> Advanced Symptom Analyzer</h3>
+        <form class="symptom-form" onsubmit="analyzeSymptoms(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="symptoms">Describe your symptoms:</label>
+              <textarea id="symptoms" required rows="4" placeholder="E.g., headache, fever, nausea..."></textarea>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="symptomDuration">Duration:</label>
+                <select id="symptomDuration" required>
+                  <option value="">Select duration</option>
+                  <option value="less than 1 day">Less than 1 day</option>
+                  <option value="1-3 days">1-3 days</option>
+                  <option value="4-7 days">4-7 days</option>
+                  <option value="1-2 weeks">1-2 weeks</option>
+                  <option value="more than 2 weeks">More than 2 weeks</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="symptomSeverity">Severity (1-10):</label>
+                <input type="range" id="symptomSeverity" min="1" max="10" value="5">
+                <span id="severityValue">5</span>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="patientAge">Age:</label>
+                <input type="number" id="patientAge" min="1" max="120" placeholder="Enter age">
+              </div>
+              
+              <div class="form-group">
+                <label for="patientGender">Gender:</label>
+                <select id="patientGender">
+                  <option value="">Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <button type="submit" class="analyze-btn">
+            <i class="fas fa-search"></i> Analyze Symptoms
+          </button>
+        </form>
+        
+        <div id="symptom-result" class="result-container" aria-live="assertive"></div>
+      </section>
+
+      <!-- Enhanced Nutrition Section -->
+      <section id="nutrition-section" class="nutrition-section" style="display:none;" aria-live="polite">
+        <h3><i class="fas fa-apple-alt"></i> Personalized Nutrition Planner</h3>
+        <form class="nutrition-form" onsubmit="generatePlan(event)">
+          <div class="form-grid">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" min="1" max="120" required>
+              </div>
+              <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" step="0.1" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" min="1" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="goal">Goal:</label>
+                <select id="goal" required>
+                  <option value="lose weight">Lose Weight</option>
+                  <option value="gain weight">Gain Weight</option>
+                  <option value="maintain weight">Maintain Weight</option>
+                  <option value="build muscle">Build Muscle</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="activityLevel">Activity Level:</label>
+                <select id="activityLevel">
+                  <option value="sedentary">Sedentary</option>
+                  <option value="light">Light Activity</option>
+                  <option value="moderate">Moderate Activity</option>
+                  <option value="active">Very Active</option>
+                  <option value="extreme">Extremely Active</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="duration">Duration:</label>
+                <select id="duration" required>
+                  <option value="1 week">1 Week</option>
+                  <option value="2 weeks">2 Weeks</option>
+                  <option value="1 month">1 Month</option>
+                  <option value="3 months">3 Months</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="dietaryRestrictions">Dietary Restrictions:</label>
+              <input type="text" id="dietaryRestrictions" placeholder="E.g., vegetarian, gluten-free, allergies...">
+            </div>
+            
+            <div class="form-group">
+              <label for="medicalConditions">Medical Conditions:</label>
+              <input type="text" id="medicalConditions" placeholder="E.g., diabetes, hypertension...">
+            </div>
+          </div>
+          
+          <button type="submit" class="generate-btn">
+            <i class="fas fa-utensils"></i> Generate Nutrition Plan
+          </button>
+        </form>
+        
+        <div id="nutrition-result" class="result-container" aria-live="assertive"></div>
+      </section>
+
+      <!-- New Drug Interaction Section -->
+      <section id="drugs-section" class="drugs-section" style="display:none;" aria-live="polite">
+        <h3><i class="fas fa-pills"></i> Drug Interaction Checker</h3>
+        <div class="drugs-container">
+          <div class="warning-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>This tool provides general information only. Always consult your pharmacist or doctor for medical advice.</span>
+          </div>
+          
+          <form class="drugs-form" onsubmit="checkDrugInteractions(event)">
+            <div class="form-group">
+              <label for="medications">List your medications:</label>
+              <textarea id="medications" required rows="6" 
+                        placeholder="Enter each medication on a new line, including:&#10;- Prescription drugs&#10;- Over-the-counter medications&#10;- Supplements&#10;- Herbal remedies&#10;&#10;Example:&#10;Ibuprofen 400mg&#10;Lisinopril 10mg&#10;Vitamin D 1000IU"></textarea>
+            </div>
+            
+            <button type="submit" class="check-btn">
+              <i class="fas fa-search"></i> Check Interactions
+            </button>
+          </form>
+          
+          <div id="drug-result" class="result-container" aria-live="assertive"></div>
+        </div>
+      </section>
+
+      <!-- Enhanced Contact Section -->
+      <section id="contact-section" class="contact-section" style="display:none;" aria-live="polite">
+        <h3><i class="fas fa-address-book"></i> Contact the Developer</h3>
         <div class="developer-info">
-          <img src="{{ url_for('static', filename='Ohidul Alam.jpg') }}" alt="Developer Ohidul Alam" class="developer-image">
-          <div class="bio-text">
-            <p>I am a passionate and ambitious professional with a strong foundation in artificial intelligence, machine learning, and data-driven problem solving. My work combines technical depth with social impact, applying AI to critical domains such as healthcare, finance, sustainability, and consumer behavior. From developing brain tumor detection models and medical AI assistants to designing ESG-driven business strategies and fraud detection systems, my projects reflect both expertise and a commitment to solving real-world challenges.</p>
-            <p>I thrive at the intersection of research and application, transforming data science and deep learning concepts into practical tools. I have deployed AI solutions through platforms like Flask, FastAPI, and Render, ensuring accessibility, usability, and impact. My ability to integrate advanced modeling with user-friendly interfaces demonstrates my vision of creating holistic, meaningful solutions rather than isolated experiments.</p>
-            <p>Beyond technical proficiency, I bring perseverance, adaptability, and creativity to every project. I embrace challenges such as debugging, optimizing models, and streamlining deployment, while maintaining strong communication through academic writing and professional networking. In essence, I embody the qualities of a modern innovator: a continuous learner, a builder of solutions, and a change-maker dedicated to making technology transformative.</p>
-          </div>
-          <div class="contact-links">
-            <h4>Get in Touch:</h4>
-            <ul>
-              <li><a href="https://www.facebook.com/share/1FQdkh5dAi/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-              <li>WhatsApp: 01771490287</li>
-              <li>Telegram: 01771490287</li>
-              <li><a href="https://www.linkedin.com/in/ohidul-alam-54123a287" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            </ul>
+          <div class="developer-card">
+            <img src="{{ url_for('static', filename='Ohidul Alam.jpg') }}" alt="Developer Ohidul Alam" class="developer-image">
+            <div class="developer-details">
+              <h4>Ohidul Alam Nannu</h4>
+              <p class="developer-title">AI & Healthcare Technology Specialist</p>
+              <div class="bio-text">
+                <p>Passionate AI developer specializing in healthcare applications, machine learning, and data-driven solutions. Creating intelligent systems that bridge technology and healthcare to improve lives globally.</p>
+                <p>Expertise in medical AI, brain tumor detection, fraud prevention, and sustainable business strategies through advanced artificial intelligence.</p>
+              </div>
+              <div class="contact-links">
+                <a href="https://www.facebook.com/share/1FQdkh5dAi/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                  <i class="fab fa-facebook"></i> Facebook
+                </a>
+                <a href="https://www.linkedin.com/in/ohidul-alam-54123a287" target="_blank" rel="noopener noreferrer" class="contact-link">
+                  <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <div class="contact-item">
+                  <i class="fab fa-whatsapp"></i> WhatsApp: +8801771490287
+                </div>
+                <div class="contact-item">
+                  <i class="fab fa-telegram"></i> Telegram: +8801771490287
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      <!-- Chat Composer -->
-      <div class="composer" role="form" aria-label="Chat input form">
-        <input id="msgInput" type="text" placeholder="Describe your symptoms..." aria-label="Enter your message" autocomplete="off" />
-        <button onclick="submitMessage()" title="Send" aria-label="Send message">➤</button>
-      </div>
     </main>
   </div>
 
+  <!-- Enhanced JavaScript -->
   <script>
-    const chatSection = document.getElementById("chat-section");
-    const nutritionSection = document.getElementById("nutrition-section");
-    const homeSection = document.getElementById("home-section");
-    const contactSection = document.getElementById("contact-section");
-    const input = document.getElementById("msgInput");
+    // Global variables
+    let currentTheme = 'dark';
+    let chatMode = 'normal';
+    
+    // DOM elements
+    const sections = {
+      home: document.getElementById("home-section"),
+      chat: document.getElementById("chat-section"),
+      symptoms: document.getElementById("symptoms-section"),
+      nutrition: document.getElementById("nutrition-section"),
+      drugs: document.getElementById("drugs-section"),
+      contact: document.getElementById("contact-section")
+    };
+    
+    const chatWindow = document.getElementById("chatWindow");
+    const msgInput = document.getElementById("msgInput");
     const pageTitle = document.getElementById("pageTitle");
+    const sessionInfo = document.getElementById("sessionInfo");
+    const sessionStats = document.getElementById("sessionStats");
 
-    function showSection(section) {
-      homeSection.style.display = section === 'home' ? 'block' : 'none';
-      chatSection.style.display = section === 'chat' ? 'flex' : 'none';
-      nutritionSection.style.display = section === 'nutrition' ? 'block' : 'none';
-      contactSection.style.display = section === 'contact' ? 'block' : 'none';
+    // Initialize app
+    window.addEventListener("load", () => {
+      showSection('home');
+      initializeSession();
+      setupEventListeners();
+    });
 
-      pageTitle.textContent = section === 'home' ? 'Home 🏠' :
-                              section === 'chat' ? 'Chat with Medical AI assistant 👩‍⚕️' :
-                              section === 'nutrition' ? 'Nutrition Planner 🍎' :
-                              'Contact 📞';
-
-      document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
-      document.querySelector(`.nav-item[onclick="showSection('${section}')"]`).classList.add("active");
-
-      if (section === 'chat') chatSection.scrollTop = chatSection.scrollHeight;
+    // Setup event listeners
+    function setupEventListeners() {
+      // Chat mode selector
+      document.getElementById("chatMode").addEventListener("change", (e) => {
+        chatMode = e.target.value;
+      });
+      
+      // Symptom severity slider
+      const severitySlider = document.getElementById("symptomSeverity");
+      if (severitySlider) {
+        severitySlider.addEventListener("input", (e) => {
+          document.getElementById("severityValue").textContent = e.target.value;
+        });
+      }
+      
+      // Enter key support for chat
+      msgInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          submitMessage();
+        }
+      });
     }
 
-    function addBubble(text, who = "user") {
+    // Initialize session
+    async function initializeSession() {
+      try {
+        const response = await fetch("/start_session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        const data = await response.json();
+        console.log("Session initialized:", data);
+      } catch (error) {
+        console.error("Failed to initialize session:", error);
+      }
+    }
+
+    // Enhanced section switching
+    function showSection(section) {
+      // Hide all sections
+      Object.values(sections).forEach(sec => sec.style.display = 'none');
+      
+      // Show selected section
+      if (sections[section]) {
+        sections[section].style.display = section === 'chat' ? 'flex' : 'block';
+      }
+
+      // Update page title
+      const titles = {
+        'home': 'Nannu AI - Advanced Medical Assistant',
+        'chat': 'AI Medical Consultation',
+        'symptoms': 'Symptom Analyzer',
+        'nutrition': 'Nutrition Planner',
+        'drugs': 'Drug Interaction Checker',
+        'contact': 'Contact Developer'
+      };
+      pageTitle.textContent = titles[section] || 'Nannu AI';
+
+      // Update navigation
+      document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+      document.querySelector(`.nav-item[onclick="showSection('${section}')"]`)?.classList.add("active");
+
+      // Special handling for chat section
+      if (section === 'chat') {
+        sessionInfo.style.display = 'block';
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+        if (!chatWindow.querySelector(".bubble")) {
+          addBubble("👋 Hello! I'm your AI medical assistant. How can I help you today?", "bot");
+        }
+        updateChatStats();
+      } else {
+        sessionInfo.style.display = 'none';
+      }
+    }
+
+    // Enhanced bubble creation with better security
+    function addBubble(text, who = "user", metadata = {}) {
       const wrap = document.createElement("div");
       wrap.className = `bubble ${who}`;
-      const icon = document.createElement("div");
-      icon.className = "icon";
-      icon.textContent = who === "user" ? "🧑" : "🩺";
-      const msg = document.createElement("div");
-      msg.className = "text";
-      msg.textContent = text;
-      wrap.appendChild(icon);
-      wrap.appendChild(msg);
-      chatSection.appendChild(wrap);
-      chatSection.scrollTop = chatSection.scrollHeight;
+      
+      const textDiv = document.createElement("div");
+      textDiv.className = "text";
+      textDiv.textContent = text; // Safe text insertion
+      
+      const iconDiv = document.createElement("div");
+      iconDiv.className = "icon";
+      iconDiv.innerHTML = who === "bot" ? '<i class="fas fa-user-md"></i>' : '<i class="fas fa-user"></i>';
+      
+      wrap.appendChild(iconDiv);
+      wrap.appendChild(textDiv);
+      
+      // Add metadata if available
+      if (metadata.timestamp) {
+        const timeDiv = document.createElement("div");
+        timeDiv.className = "message-time";
+        timeDiv.textContent = new Date(metadata.timestamp).toLocaleTimeString();
+        wrap.appendChild(timeDiv);
+      }
+      
+      chatWindow.appendChild(wrap);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      
+      return wrap;
     }
 
+    // Enhanced message submission
     async function submitMessage() {
-      const message = input.value.trim();
-      if (!message) {
-        input.setCustomValidity("Please enter a message.");
-        input.reportValidity();
-        return;
-      }
-      input.setCustomValidity("");
+      const message = msgInput.value.trim();
+      if (!message) return;
+      
       addBubble(message, "user");
-      input.value = "";
-      const thinking = document.createElement("div");
-      thinking.className = "bubble bot typing";
-      thinking.innerHTML = `<div class="icon">🩺</div><div class="text">Thinking…</div>`;
-      chatSection.appendChild(thinking);
-      chatSection.scrollTop = chatSection.scrollHeight;
-
+      msgInput.value = "";
+      
+      // Show typing indicator
+      const typing = addBubble("Analyzing your message...", "bot");
+      typing.classList.add("typing");
+      
       try {
-        const res = await fetch("/chat", {
+        const response = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message })
+          body: JSON.stringify({ 
+            message: message,
+            mode: chatMode 
+          })
         });
-        const data = await res.json();
-        thinking.remove();
-        addBubble(data.reply || "Sorry, something went wrong.", "bot");
-      } catch (e) {
-        thinking.remove();
-        addBubble("Network error. Please try again.", "bot");
+        
+        const data = await response.json();
+        typing.remove();
+        
+        if (data.ok) {
+          addBubble(data.reply, "bot", data.metadata || {});
+          updateChatStats();
+        } else {
+          addBubble("Sorry, I encountered an error. Please try again.", "bot");
+        }
+      } catch (error) {
+        typing.remove();
+        addBubble("Network error. Please check your connection and try again.", "bot");
+        console.error("Chat error:", error);
       }
     }
 
-    function generatePlan() {
+    // Symptom analysis
+    async function analyzeSymptoms(event) {
+      event.preventDefault();
+      
+      const data = {
+        symptoms: document.getElementById("symptoms").value,
+        duration: document.getElementById("symptomDuration").value,
+        severity: document.getElementById("symptomSeverity").value,
+        age: document.getElementById("patientAge").value,
+        gender: document.getElementById("patientGender").value
+      };
+      
+      const resultDiv = document.getElementById("symptom-result");
+      resultDiv.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Analyzing symptoms...</div>';
+      
+      try {
+        const response = await fetch("/analyze_symptoms", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.ok) {
+          resultDiv.innerHTML = `
+            <div class="analysis-result">
+              <h4><i class="fas fa-clipboard-check"></i> Symptom Analysis Results</h4>
+              <div class="result-content">${formatAnalysisResult(result.reply)}</div>
+              <div class="result-footer">
+                <small><i class="fas fa-clock"></i> Analysis completed at ${new Date(result.timestamp).toLocaleString()}</small>
+              </div>
+            </div>
+          `;
+        } else {
+          resultDiv.innerHTML = `<div class="error"><i class="fas fa-exclamation-circle"></i> ${result.reply}</div>`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-circle"></i> Network error. Please try again.</div>';
+        console.error("Symptom analysis error:", error);
+      }
+    }
+
+    // Enhanced nutrition plan generation
+    async function generatePlan(event) {
+      event.preventDefault();
+      
       const data = {
         age: document.getElementById("age").value,
         weight: document.getElementById("weight").value,
         height: document.getElementById("height").value,
         goal: document.getElementById("goal").value,
-        duration: document.getElementById("duration").value
+        duration: document.getElementById("duration").value,
+        activity_level: document.getElementById("activityLevel").value,
+        dietary_restrictions: document.getElementById("dietaryRestrictions").value,
+        medical_conditions: document.getElementById("medicalConditions").value
       };
-
-      if (!data.age || !data.weight || !data.height) {
-        document.getElementById("nutrition-result").innerHTML = `<p class="error">Please fill in all required fields.</p>`;
-        return;
+      
+      const resultDiv = document.getElementById("nutrition-result");
+      resultDiv.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Creating your personalized nutrition plan...</div>';
+      
+      try {
+        const response = await fetch("/nutrition", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.ok) {
+          resultDiv.innerHTML = `
+            <div class="nutrition-result">
+              <h4><i class="fas fa-utensils"></i> Your Personalized Nutrition Plan</h4>
+              <div class="plan-content">${formatNutritionResult(result.reply)}</div>
+              <div class="result-footer">
+                <small><i class="fas fa-clock"></i> Plan generated at ${new Date(result.timestamp).toLocaleString()}</small>
+              </div>
+            </div>
+          `;
+        } else {
+          resultDiv.innerHTML = `<div class="error"><i class="fas fa-exclamation-circle"></i> ${result.reply}</div>`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-circle"></i> Network error. Please try again.</div>';
+        console.error("Nutrition plan error:", error);
       }
-
-      fetch("/nutrition", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("nutrition-result").innerHTML = `<div class="plan-output">${data.reply || "Error generating plan. Please try again."}</div>`;
-      })
-      .catch(() => {
-        document.getElementById("nutrition-result").innerHTML = `<p class="error">Network error. Please try again.</p>`;
-      });
     }
 
-    input.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        submitMessage();
+    // Drug interaction checking
+    async function checkDrugInteractions(event) {
+      event.preventDefault();
+      
+      const medications = document.getElementById("medications").value;
+      const resultDiv = document.getElementById("drug-result");
+      
+      resultDiv.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Checking drug interactions...</div>';
+      
+      try {
+        const response = await fetch("/drug_interaction", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ medications })
+        });
+        
+        const result = await response.json();
+        
+        if (result.ok) {
+          resultDiv.innerHTML = `
+            <div class="drug-result">
+              <h4><i class="fas fa-pills"></i> Drug Interaction Analysis</h4>
+              <div class="interaction-content">${formatDrugResult(result.reply)}</div>
+              <div class="result-footer">
+                <small><i class="fas fa-clock"></i> Analysis completed at ${new Date(result.timestamp).toLocaleString()}</small>
+              </div>
+            </div>
+          `;
+        } else {
+          resultDiv.innerHTML = `<div class="error"><i class="fas fa-exclamation-circle"></i> ${result.reply}</div>`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-circle"></i> Network error. Please try again.</div>';
+        console.error("Drug interaction error:", error);
       }
-    });
+    }
 
-    window.addEventListener("load", () => {
-      if (chatSection.style.display === 'flex') {
-        addBubble("Hello! How are you feeling today?", "bot");
+    // Utility functions for formatting results
+    function formatAnalysisResult(text) {
+      return text.replace(/\n/g, '<br>').replace(/\*\s/g, '<br>• ');
+    }
+
+    function formatNutritionResult(text) {
+      return text.replace(/\n/g, '<br>').replace(/\*\s/g, '<br>• ');
+    }
+
+    function formatDrugResult(text) {
+      return text.replace(/\n/g, '<br>').replace(/\*\s/g, '<br>• ');
+    }
+
+    // Chat utility functions
+    function insertSuggestion(text) {
+      msgInput.value = text;
+      msgInput.focus();
+    }
+
+    async function exportChat() {
+      try {
+        const response = await fetch("/export_chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        
+        const data = await response.json();
+        
+        if (data.ok) {
+          const blob = new Blob([JSON.stringify(data.chat_data, null, 2)], {
+            type: 'application/json'
+          });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `nannu-ai-chat-${new Date().toISOString().split('T')[0]}.json`;
+          a.click();
+          URL.revokeObjectURL(url);
+        }
+      } catch (error) {
+        console.error("Export error:", error);
+        alert("Failed to export chat. Please try again.");
+      }
+    }
+
+    async function showChatStats() {
+      try {
+        const response = await fetch("/chat_statistics");
+        const data = await response.json();
+        
+        if (data.ok && data.stats) {
+          alert(`Chat Statistics:
+            • Total Messages: ${data.stats.total_messages}
+            • Your Messages: ${data.stats.user_messages}
+            • AI Responses: ${data.stats.bot_messages}
+            • Topics Discussed: ${data.stats.topics_discussed}
+            • Session: ${data.stats.session_duration}`);
+        }
+      } catch (error) {
+        console.error("Stats error:", error);
+      }
+    }
+
+    async function updateChatStats() {
+      try {
+        const response = await fetch("/chat_statistics");
+        const data = await response.json();
+        
+        if (data.ok && data.stats) {
+          sessionStats.textContent = `Messages: ${data.stats.total_messages} | Mode: ${chatMode}`;
+        }
+      } catch (error) {
+        console.error("Update stats error:", error);
+      }
+    }
+
+    async function clearChat() {
+      if (confirm("Are you sure you want to clear the chat history?")) {
+        try {
+          await fetch("/clear_history", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+          });
+          
+          chatWindow.innerHTML = "";
+          addBubble("👋 Hello! I'm medical AI assistant. How can I help you today?", "bot");
+          updateChatStats();
+        } catch (error) {
+          console.error("Clear chat error:", error);
+        }
+      }
+    }
+
+    // Theme toggle
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', currentTheme);
+      
+      const themeIcon = document.querySelector('#themeToggle i');
+      themeIcon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      
+      localStorage.setItem('theme', currentTheme);
+    }
+
+    // Load saved theme
+    window.addEventListener('load', () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      currentTheme = savedTheme;
+      document.body.setAttribute('data-theme', currentTheme);
+      
+      const themeIcon = document.querySelector('#themeToggle i');
+      if (themeIcon) {
+        themeIcon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
       }
     });
   </script>
