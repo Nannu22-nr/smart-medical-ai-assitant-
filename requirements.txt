@@ -4,3 +4,9 @@ python-dotenv
 Werkzeug
 groq
 gunicorn
+flask
+numpy
+pillow
+pypdf
+pandas
+onnxruntime
